@@ -1,0 +1,32 @@
+"scripts": {
+  "migration:generate" -- generate a default migration wich has a query to alter an column in the table,
+  "migration:create" -- create a empty migration,
+
+}
+
+up: contians the new change to apply over the table on the databese
+down: revert the changes performered.
+
+
+begin
+//? Viendo si el programa existe
+  select * from programa
+  if found then
+  //* Viendo si es musical
+    select * from musical
+    if found then
+      return Datos_musical.conductor
+    end if;
+  //* Viendo si es novela
+    select * from novela
+    if found then
+      return Datos_novela.escritor
+    else
+      return 'Eliminado';
+    end if;
+  else
+    delete from programa
+    if found then
+      return 'Eliminado';
+  end if;
+end;
